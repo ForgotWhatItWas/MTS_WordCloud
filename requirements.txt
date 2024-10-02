@@ -4,7 +4,7 @@ pip install navec
 pip install pymorphy3
 pip install pymorphy3-dicts-ru
 pip install Flask
-pip requests
-pip re
-pip nltk
-pip spacy
+pip install requests
+pip install regex
+pip install nltk
+pip install spacy
