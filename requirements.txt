@@ -1,6 +1,6 @@
-!pip install jamspell
-!pip install fasttext
-!pip install navec
-!pip install pymorphy3
-!pip install pymorphy3-dicts-ru
-!pip install Flask
+pip install jamspell
+pip install fasttext
+pip install navec
+pip install pymorphy3
+pip install pymorphy3-dicts-ru
+pip install Flask
