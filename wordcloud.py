@@ -4,7 +4,6 @@ import gensim.downloader
 import requests, re, nltk
 from nltk.tokenize import word_tokenize
 from collections import Counter
-import time
 import pymorphy3
 import spacy
 from nltk.corpus import stopwords
@@ -13,7 +12,7 @@ from navec import Navec
 import fasttext as ft
 from scipy import spatial
 import os
-from flask import Flask, request, abort
+from flask import Flask, request, abort, send_file
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -130,23 +129,22 @@ def process_txt_file(input_path, output_path):
     with open(output_path, 'w') as file:
         for word, count in filtered_word_freq.items():
             file.write(f'{word}: {count}\n')
-        file.write(f"--- {time.time() - start1_time} seconds ---")
 
 # Function to check if file type is allowed
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['POST'])
-def wc():
+def wrds():
     # Check if a file part is in the request
     if 'file' not in request.files:
-        return 'No file part', 444
+        return 'No file part', 400
 
     file = request.files['file']
 
     # Check if the file is selected
     if file.filename == '':
-        return 'No selected file', 434
+        return 'No selected file', 40
 
     # Check file type and save it as 'text.txt'
     if file and allowed_file(file.filename):
@@ -158,7 +156,6 @@ def wc():
             return f'Error saving file: {str(e)}', 500
 
         # Process the file and generate 'output.txt'
-        start1_time = time.time()
         output_filepath = os.path.join(app.config['UPLOAD_FOLDER'], 'output.txt')
         try:
             process_txt_file(filepath, output_filepath)
@@ -175,4 +172,4 @@ def wc():
 
 # Main entry point
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
