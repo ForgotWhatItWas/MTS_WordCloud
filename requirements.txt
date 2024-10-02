@@ -1,10 +1,12 @@
+pip install regex
+pip install requests
+pip install nltk
+pip install spacy
+pip install scipy
 pip install jamspell
 pip install fasttext
 pip install navec
 pip install pymorphy3
 pip install pymorphy3-dicts-ru
 pip install Flask
-pip install requests
-pip install regex
-pip install nltk
-pip install spacy
+pip install gensim
